@@ -1,0 +1,46 @@
+{
+  "name": "deernation-plugin-content-events",
+  "description": "Content plugin for the DeerNation application providing events.",
+  "version": "0.0.1",
+  "contributors": [
+    {
+      "name": "Tobias Bräutigam",
+      "email": "tbraeutigam@gmail.com"
+    }
+  ],
+  "dependencies": {},
+  "keywords": ["DeerNation", "content-plugin", "events"],
+  "readmeFilename": "README.md",
+  "scripts": {
+    "preproto": "rm -r protolib/*",
+    "protoc": "protoc --proto_path=. --qx_out=protolib backend/payload.proto",
+    "postprotoc": "rm -r protolib/source/class/proto/core"
+  },
+  "devDependencies": {
+    "protoc-gen-qx": "git+https://github.com/peuter/protoc-gen-qx.git"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "ignore": [
+      "node_modules/**"
+    ],
+    "globals": [
+      "app",
+      "qx",
+      "dialog",
+      "socketCluster",
+      "wampSocketCluster",
+      "showdown",
+      "firebase",
+      "PushNotification",
+      "scCodecMinBin",
+      "$",
+      "proto",
+      "jspb"
+    ]
+  }
+}
