@@ -3,7 +3,7 @@
  *
  * @author Tobias Bräutigam <tbraeutigam@gmail.com>
  * @since 2018
- * @require(proto.dn.model.payload.Event)
+ * @require(app.plugins.event.Payload)
  */
 
 qx.Class.define('app.plugins.event.Main', {

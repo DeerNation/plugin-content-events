@@ -1,13 +1,13 @@
 
 /**
  * An Event is a date related activity with a start and end date.
- * Event class generated from protobuf definition "backend/payload.proto".
+ * Payload class generated from protobuf definition "backend/payload.proto".
  * auto-generated code PLEASE DO NOT EDIT!
  * 
  */
-qx.Class.define('proto.dn.model.payload.Event', {
+qx.Class.define('app.plugins.event.Payload', {
   extend: proto.core.BaseMessage,
-  include: [app.plugins.message.MEvent, app.api.MUpdate],
+  include: [app.plugins.event.MEvent, app.api.MUpdate],
 
   /*
   *****************************************************************************
@@ -93,20 +93,20 @@ qx.Class.define('proto.dn.model.payload.Event', {
     /**
      * Deserializes binary data (in protobuf wire format).
      * @param bytes {jspb.ByteSource} The bytes to deserialize.
-     * @return {proto.dn.model.payload.Event}
+     * @return {app.plugins.event.Payload}
      */
     deserializeBinary: function (bytes) {
       var reader = new jspb.BinaryReader(bytes)
-      var msg = new proto.dn.model.payload.Event()
-      return proto.dn.model.payload.Event.deserializeBinaryFromReader(msg, reader)
+      var msg = new app.plugins.event.Payload()
+      return app.plugins.event.Payload.deserializeBinaryFromReader(msg, reader)
     },
 
     /**
      * Deserializes binary data (in protobuf wire format) from the
      * given reader into the given message object.
-     * @param msg {proto.dn.model.payload.Event} The message object to deserialize into.
+     * @param msg {app.plugins.event.Payload} The message object to deserialize into.
      * @param reader {jspb.BinaryReader} The BinaryReader to use.
-     * @return {proto.dn.model.payload.Event}
+     * @return {app.plugins.event.Payload}
      */
     deserializeBinaryFromReader: function (msg, reader) {
       msg.setDeserialized(true)

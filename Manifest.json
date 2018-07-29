@@ -22,7 +22,7 @@
   "provides" :
   {
     "encoding"    : "utf-8",
-    "id"          : "Event",
+    "id"          : "event",
     "namespace"   : "app.plugins.event",
     "class"       : "frontend/class",
     "resource"    : "frontend/resource",

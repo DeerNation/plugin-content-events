@@ -176,7 +176,8 @@ qx.Class.define('app.plugins.event.Calendar', {
      */
     _onEventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
       console.log(event.title + ' end is now ' + event.end.format())
-      app.api.Service.updateProperty(event.id, ['end'], [event.end.format()], app.dn.model.Event).catch(() => {
+      // TODO: does not work with payload objects (not allowed as Object oneOf content)
+      app.api.Service.updateProperty(event.id, ['end'], [event.end.format()], app.plugins.event.Payload).catch(() => {
         revertFunc()
       })
     },
@@ -192,7 +193,8 @@ qx.Class.define('app.plugins.event.Calendar', {
      * @protected
      */
     _onEventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-      app.api.Service.updateProperty(event.id, ['start', 'end'], [event.start.format(), event.end.format()], app.dn.model.Event).catch(() => {
+      // TODO: does not work with payload objects (not allowed as Object oneOf content)
+      app.api.Service.updateProperty(event.id, ['start', 'end'], [event.start.format(), event.end.format()], app.plugins.event.Payload).catch(() => {
         revertFunc()
       })
     },

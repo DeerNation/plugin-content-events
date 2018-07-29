@@ -1,12 +1,12 @@
 syntax = "proto3";
 import "node_modules/protoc-gen-qx/protos/extensions.proto";
 
-package dn.model.payload;
+package plugins.event;
 
 /**
  * An Event is a date related activity with a start and end date.
  */
-message Event {
+message Payload {
     // UUID of this entry
     string uid = 1;
     string name = 2;

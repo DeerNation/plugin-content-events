@@ -12,9 +12,7 @@
   "keywords": ["DeerNation", "content-plugin", "events"],
   "readmeFilename": "README.md",
   "scripts": {
-    "preproto": "rm -r protolib/*",
-    "protoc": "protoc --proto_path=. --qx_out=protolib backend/payload.proto",
-    "postprotoc": "rm -r protolib/source/class/proto/core"
+    "protoc": "protoc --proto_path=. --qx_out=frontend backend/payload.proto"
   },
   "devDependencies": {
     "protoc-gen-qx": "git+https://github.com/peuter/protoc-gen-qx.git"
