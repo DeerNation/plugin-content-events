@@ -1,6 +1,9 @@
 {
   "Event": {
     "properties": {
+      "uid": {
+        "type": "string"
+      },
       "name": {
         "type": "string"
       },
