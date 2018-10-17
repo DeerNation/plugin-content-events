@@ -5,10 +5,12 @@
  * @since 2018
  */
 const createNotification = (message) => {
-  return {
-    phrase: 'New message in %s',
-    content: message.content.message
+  let res = {
+    phrase: 'New event in %s',
+    content: message.start + ' ' + message.name,
+    image: null
   }
+  return res
 }
 
 module.exports = createNotification
