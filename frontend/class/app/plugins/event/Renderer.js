@@ -102,7 +102,7 @@ qx.Class.define('app.plugins.event.Renderer', {
         }
       }
       if (value) {
-        const content = value.getContent()
+        const content = value.getContent().getValue()
         if (content) {
           let control = this.getChildControl('title')
           this._bindPropertyToChildControl(content, 'name', 'title', 'value', {

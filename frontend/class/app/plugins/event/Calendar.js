@@ -152,8 +152,8 @@ qx.Class.define('app.plugins.event.Calendar', {
       const popup = this.getChildControl('popup')
       if (popup.getVisibility() !== 'visible') {
         this.getPublications().some(act => {
-          if (act.getActivity().getContent().getUid() === calEvent.id) {
-            this.getChildControl('renderer').setModel(act)
+          if (act.getUid() === calEvent.id) {
+            this.getChildControl('renderer').setModel(act.getActivity())
             return true
           }
         })
