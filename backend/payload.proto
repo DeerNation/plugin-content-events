@@ -11,8 +11,8 @@ message Payload {
     string uid = 1;
     string name = 2;
     string location = 3;
-    string start = 4 [(qx).date = true];
-    string end = 5 [(qx).date = true];
+    string start = 4 [(qx).type = "date"];
+    string end = 5 [(qx).type = "date"];
     repeated string categories = 6;
     string organizer = 7;
     string description = 8;

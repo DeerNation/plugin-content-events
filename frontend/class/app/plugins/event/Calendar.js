@@ -50,7 +50,7 @@ qx.Class.define('app.plugins.event.Calendar', {
       return new proto.dn.ChannelRequest({
         uid: subscription.getChannel().getUid(),
         channelId: subscription.getChannel().getId(),
-        date: new Date()
+        date: new Date((Date.now() + new Date().getTimezoneOffset() * 60000))
       })
     },
 
@@ -108,7 +108,7 @@ qx.Class.define('app.plugins.event.Calendar', {
       const acls = this.getChannelActivitiesAcls()
 
       this.getPublications().forEach(act => {
-        const event = act.getActivity().getContent()
+        const event = act.getActivity().getContent().getValue()
         if (event) {
           if (event.getEnd() >= startDate && event.getStart() <= endDate) {
             // workaround for wrong allDay events

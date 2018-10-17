@@ -10,6 +10,7 @@ module.exports = {
     }
   },
   skipDeps: ['google-protobuf.js', 'grpc-web-client.js'],
+  require: ['node_modules/protoc-gen-qx/extensions_pb'],
   skipDepLoadingFallback: true,
   withoutSemi: true,
   repeatedClass: 'app.api.Array'

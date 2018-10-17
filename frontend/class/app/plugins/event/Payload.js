@@ -54,6 +54,7 @@ qx.Class.define('app.plugins.event.Payload', {
         )
       }
       f = message.getStart()
+      f = f instanceof Date ? f.toISOString() : ''
       if (f.length > 0) {
         writer.writeString(
           4,
@@ -61,6 +62,7 @@ qx.Class.define('app.plugins.event.Payload', {
         )
       }
       f = message.getEnd()
+      f = f instanceof Date ? f.toISOString() : ''
       if (f.length > 0) {
         writer.writeString(
           5,
@@ -187,17 +189,19 @@ qx.Class.define('app.plugins.event.Payload', {
     },
 
     start: {
-      check: 'String',
-      init: '',
-      nullable: false,
-      event: 'changeStart'
+      check: 'Date',
+      init: null,
+      nullable: true,
+      event: 'changeStart',
+      transform: '_toDate'
     },
 
     end: {
-      check: 'String',
-      init: '',
-      nullable: false,
-      event: 'changeEnd'
+      check: 'Date',
+      init: null,
+      nullable: true,
+      event: 'changeEnd',
+      transform: '_toDate'
     },
 
     /**
