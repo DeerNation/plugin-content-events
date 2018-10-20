@@ -20,9 +20,13 @@ qx.Class.define('app.plugins.event.Calendar', {
     this._createChildControl('calendar-container')
     this._createChildControl('status-bar')
 
+    this.initChannelRequest(new proto.dn.ChannelRequest())
+
     this.addListener('refresh', this.__refresh, this)
 
     this.__qxEvent = new qx.event.type.Pointer()
+
+    this.__service = new proto.dn.Com(app.io.Socket.getInstance())
   },
 
   /*
@@ -34,6 +38,11 @@ qx.Class.define('app.plugins.event.Calendar', {
     appearance: {
       refine: true,
       init: 'calendar-view'
+    },
+
+    channelRequest: {
+      check: 'proto.dn.ChannelRequest',
+      deferredInit: true
     }
   },
 
@@ -45,12 +54,19 @@ qx.Class.define('app.plugins.event.Calendar', {
   members: {
     __calendar: null,
     __qxEvent: null,
+    __currentStartDate: null,
+    __currentEndDate: null,
+    __service: null,
 
     _getChannelRequest: function (subscription) {
-      return new proto.dn.ChannelRequest({
+      const now = new Date()
+      const startDate = new Date(Date.parse(now.getFullYear() + '-' + now.getMonth() + '-01'))
+      const endDate = new Date(Date.parse(now.getFullYear() + '-' + (now.getMonth() + 1) % 12 + '-01'))
+      return this.getChannelRequest().set({
         uid: subscription.getChannel().getUid(),
         channelId: subscription.getChannel().getId(),
-        date: new Date((Date.now() + new Date().getTimezoneOffset() * 60000))
+        fromDate: startDate,
+        toDate: endDate
       })
     },
 
@@ -93,14 +109,26 @@ qx.Class.define('app.plugins.event.Calendar', {
       }
     },
 
-    _getEvents: function (start, end, timezone, callback) {
+    _getEvents: async function (start, end, timezone, callback) {
+      const startDate = start.toDate()
+      const endDate = end.toDate()
+      this.getChannelRequest().set({
+        fromDate: startDate,
+        toDate: endDate,
+        publicationsOnly: true
+      })
       let events = []
       if (!this.getSubscription() || !this.getPublications()) {
         callback(events)
         return
       }
-      const startDate = start.toDate()
-      const endDate = end.toDate()
+
+      // load events from backend
+      const channelModel = await this.__service.getChannelModel(this.getChannelRequest())
+      if (channelModel) {
+        this.getPublications().replace(channelModel.getPublications())
+      }
+
       this.debug('collect events from', startDate, 'to', endDate)
       const actor = app.Model.getInstance().getActor()
       const channelRelation = app.Model.getInstance().getChannelRelation(this.getSubscription().getChannel())
@@ -260,5 +288,15 @@ qx.Class.define('app.plugins.event.Calendar', {
       }
       return control || this.base(arguments, id, hash)
     }
+  },
+
+  /*
+  ***********************************************
+    DESTRUCTOR
+  ***********************************************
+  */
+  destruct: function () {
+    this._disposeObjects('__service')
+    this.__calendar = null
   }
 })
