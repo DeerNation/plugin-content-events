@@ -8,8 +8,15 @@
       "email": "tbraeutigam@gmail.com"
     }
   ],
-  "dependencies": {},
-  "keywords": ["DeerNation", "content-plugin", "events"],
+  "dependencies": {
+    "deernation-proto-options": "git+https://github.com/DeerNation/proto-options.git",
+    "protobufjs": "^6.8.8"
+  },
+  "keywords": [
+    "DeerNation",
+    "content-plugin",
+    "events"
+  ],
   "readmeFilename": "README.md",
   "scripts": {
     "protoc": "protoc --proto_path=. --qx_out=frontend backend/payload.proto"

@@ -1,16 +1,8 @@
 syntax = "proto3";
-import "node_modules/protoc-gen-qx/protos/extensions.proto";
+import "node_modules/deernation-proto-options/options.proto";
 
 // package part after prefix "plugins." must be eual to the "id" defined in the plugins Manifest.json
 package plugins.event;
-
-message DnFieldOptions {
-    string tags = 1;
-}
-
-extend google.protobuf.FieldOptions {
-    DnFieldOptions dn = 100002;
-}
 
 /**
  * An Event is a date related activity with a start and end date.
