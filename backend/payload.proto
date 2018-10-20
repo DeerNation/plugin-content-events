@@ -1,18 +1,28 @@
 syntax = "proto3";
 import "node_modules/protoc-gen-qx/protos/extensions.proto";
 
+// package part after prefix "plugins." must be eual to the "id" defined in the plugins Manifest.json
 package plugins.event;
+
+message DnFieldOptions {
+    string tags = 1;
+}
+
+extend google.protobuf.FieldOptions {
+    DnFieldOptions dn = 100002;
+}
 
 /**
  * An Event is a date related activity with a start and end date.
+ * The message name must be Payload for all content plugins.
  */
 message Payload {
     // UUID of this entry
     string uid = 1;
     string name = 2;
     string location = 3;
-    string start = 4 [(qx).type = "date"];
-    string end = 5 [(qx).type = "date"];
+    string start = 4 [(dn).tags = 'type="dateTime" index="month"'];
+    string end = 5 [(dn).tags = 'type="dateTime"'];
     repeated string categories = 6;
     string organizer = 7;
     string description = 8;
