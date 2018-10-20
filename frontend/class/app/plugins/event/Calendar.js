@@ -60,13 +60,16 @@ qx.Class.define('app.plugins.event.Calendar', {
 
     _getChannelRequest: function (subscription) {
       const now = new Date()
-      const startDate = new Date(Date.parse(now.getFullYear() + '-' + now.getMonth() + '-01'))
-      const endDate = new Date(Date.parse(now.getFullYear() + '-' + (now.getMonth() + 1) % 12 + '-01'))
+      const startDate = new Date(Date.parse(now.getFullYear() + '-' + now.getMonth() + 1 + '-01'))
+      const endDate = new Date(Date.parse(now.getFullYear() + '-' + (now.getMonth() + 2) % 12 + '-01'))
       return this.getChannelRequest().set({
         uid: subscription.getChannel().getUid(),
         channelId: subscription.getChannel().getId(),
-        fromDate: startDate,
-        toDate: endDate
+        payloadFilter: new proto.dn.PayloadFilter({
+          type: 'event',
+          fromDate: startDate,
+          toDate: endDate
+        })
       })
     },
 
@@ -112,10 +115,13 @@ qx.Class.define('app.plugins.event.Calendar', {
     _getEvents: async function (start, end, timezone, callback) {
       const startDate = start.toDate()
       const endDate = end.toDate()
+
       this.getChannelRequest().set({
-        fromDate: startDate,
-        toDate: endDate,
         publicationsOnly: true
+      })
+      this.getChannelRequest().getPayloadFilter().set({
+        fromDate: startDate,
+        toDate: endDate
       })
       let events = []
       if (!this.getSubscription() || !this.getPublications()) {

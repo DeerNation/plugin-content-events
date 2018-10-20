@@ -28,7 +28,7 @@
     "resource"    : "frontend/resource",
     "translation" : "frontend/translation",
     "jsonSchema"  : "backend/schema.json",
-    "graphQlType" : "backend/graphqlType.js",
+    "queryHandler": "backend/QueryHandler.js",
     "notification": "backend/Notification.js",
     "type"        : "contentPlugin"
   }
