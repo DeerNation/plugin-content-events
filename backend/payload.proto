@@ -13,8 +13,8 @@ message Payload {
     string uid = 1;
     string name = 2;
     string location = 3;
-    string start = 4 [(dn).tags = 'type="dateTime" index="month"'];
-    string end = 5 [(dn).tags = 'type="dateTime"'];
+    string start = 4 [(dno).tags = 'type="dateTime" index="month"'];
+    string end = 5 [(dno).tags = 'type="dateTime"'];
     repeated string categories = 6;
     string organizer = 7;
     string description = 8;
