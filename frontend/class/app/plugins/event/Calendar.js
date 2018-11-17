@@ -61,8 +61,8 @@ qx.Class.define('app.plugins.event.Calendar', {
     _getChannelRequest: function (subscription) {
       const now = new Date()
       let month = (now.getMonth() + 1);
-      const startDate = new Date(Date.parse(now.getFullYear() + '-' + qx.lang.String.pad(month, 2, '0') + '-01'))
-      const endDate = new Date(Date.parse(now.getFullYear() + '-' + qx.lang.String.pad((month + 1) % 12, 2, '0') + '-01'))
+      const startDate = new Date(Date.parse(now.getFullYear() + '-' + qx.lang.String.pad('' + month, 2, '0') + '-01'))
+      const endDate = new Date(Date.parse(now.getFullYear() + '-' + qx.lang.String.pad('' + (month + 1) % 13, 2, '0') + '-01'))
       return this.getChannelRequest().set({
         uid: subscription.getChannel().getUid(),
         channelId: subscription.getChannel().getId(),
